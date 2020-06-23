@@ -1,0 +1,8 @@
+.Content {
+    background: rgb(194, 233, 189);
+    grid-area: c;
+  }
+  
+  .Content img {
+      width: 100%;
+  }

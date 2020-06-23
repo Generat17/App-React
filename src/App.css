@@ -14,27 +14,3 @@
   ;
 
 }
-
-header img {
-  width: 50px;
-}
-
-.Header {
-  background: rgb(143, 34, 116);
-  grid-area: h;
-}
-
-.Nav {
-  background: darksalmon;
-  grid-area: n;
-}
-
-.Content {
-  background: rgb(194, 233, 189);
-  grid-area: c;
-}
-
-.Footer {
-  background: rgb(0, 183, 255);
-  grid-area: f;
-}

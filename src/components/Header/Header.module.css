@@ -1,0 +1,8 @@
+.Header {
+    background: rgb(143, 34, 116);
+    grid-area: h;
+  }
+
+  header img {
+    width: 50px;
+  }
