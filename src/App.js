@@ -8,20 +8,25 @@ import Footer from './components/Footer/Footer';
 import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 
-const App = () => {
-  return (
-      <BrowserRouter>
-    <div className="app-wrapper">
-      <Header />
-      <Navbar />
-      <div className="app-wrapper-content">
-          <Route path='/profile' component={Profile}/>
-          <Route path='/dialogs' component={Dialogs}/>
-      </div>
-      <Footer />
-    </div>
-      </BrowserRouter>
-  );
+const App = (props) => {
+    return (
+        <BrowserRouter>
+            <div className="app-wrapper">
+                <Header/>
+                <Navbar/>
+                <div className="app-wrapper-content">
+                    <Route path='/profile' render={() => <Profile
+                        posts={props.appState.profilePage.postData}
+                    />}/>
+                    <Route path='/dialogs' render={() => <Dialogs
+                        messagesData={props.appState.messagePage.messagesData}
+                        dialogsData={props.appState.messagePage.dialogsData}
+                    />}/>
+                </div>
+                <Footer/>
+            </div>
+        </BrowserRouter>
+    );
 }
 
 export default App;
