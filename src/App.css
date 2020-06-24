@@ -12,5 +12,9 @@
     "n c"
     "f f"
   ;
+}
 
+.app-wrapper-content {
+  background: rgb(194, 233, 189);
+  grid-area: c;
 }

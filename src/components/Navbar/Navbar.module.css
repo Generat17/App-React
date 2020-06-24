@@ -1,4 +1,19 @@
 .Nav {
     background: rgb(216, 243, 129);
     grid-area: n;
+    padding-left: 30px;
+}
+
+.Nav ul {
+    list-style-type: none;
+    font-size: 20px;
+}
+
+.activeLink {
+    color: blue;
+}
+
+.Nav a {
+    text-decoration: none;
+    color: black;
 }
