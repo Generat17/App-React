@@ -7,6 +7,7 @@ import Profile from './components/Profile/Profile';
 import Footer from './components/Footer/Footer';
 import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
+import {newPost} from "./redux/state";
 
 const App = (props) => {
     return (
@@ -17,6 +18,10 @@ const App = (props) => {
                 <div className="app-wrapper-content">
                     <Route path='/profile' render={() => <Profile
                         posts={props.appState.profilePage.postData}
+                        newPost={props.newPost}
+                        newPostText={props.appState.profilePage.newPostText}
+                        updateNewPostText={props.updateNewPostText}
+
                     />}/>
                     <Route path='/dialogs' render={() => <Dialogs
                         messagesData={props.appState.messagePage.messagesData}

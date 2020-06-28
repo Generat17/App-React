@@ -25,8 +25,34 @@ let state = {
             {id: 2, message: 'American a typical one is a desire!'},
             {id: 3, message: 'to get a well-paid job that.'},
             {id: 4, message: 'Some companies now!'}
-        ]
+        ],
+        newPostText: ''
     }
 };
+
+let rerenderEntireTree = () => {
+    console.log('hello');
+}
+
+export let subscribe = (observer) => {
+    rerenderEntireTree = observer;
+}
+
+export let newPost = (newMessage) => {
+    debugger;
+    let currentPost = {
+        id : 5,
+        message : newMessage
+    }
+
+    state.profilePage.postData.push(currentPost);
+    state.profilePage.newPostText = '';
+    rerenderEntireTree(state);
+}
+
+export let updateNewPosText = (newText) => {
+    state.profilePage.newPostText = newText;
+    rerenderEntireTree(state);
+}
 
 export default state;
