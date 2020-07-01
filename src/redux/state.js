@@ -1,3 +1,6 @@
+import dialogsReducer from "./dialogs-reducer";
+import profileReducer from "./profile-reducer";
+
 let store = {
     _state: {
         messagePage: {
@@ -17,7 +20,8 @@ let store = {
                 {id: 3, name: 'Alexunder Adamov'},
                 {id: 4, name: 'Alieva Ludmila'},
                 {id: 5, name: 'Goncharova Tatiana'}
-            ]
+            ],
+            newMessageText : ''
         },
         profilePage: {
             postData: [
@@ -30,27 +34,19 @@ let store = {
             newPostText: ''
         }
     },
-    getState() {
-        return this._state;
-    },
     _callSubscriber() {
         console.log('hello');
+    },
+    getState() {
+        return this._state;
     },
     subscribe(observer) {
         this._callSubscriber = observer;
     },
-    newPost(newMessage) {
-        let currentPost = {
-            id: 5,
-            message: newMessage
-        }
 
-        this._state.profilePage.postData.push(currentPost);
-        this._state.profilePage.newPostText = '';
-        this._callSubscriber(this._state);
-    },
-    updateNewPosText (newText) {
-        this._state.profilePage.newPostText = newText;
+    dispatch(action) { // { type: 'ADD-POST' }
+        this._state.messagePage = dialogsReducer(this._state.messagePage, action);
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
         this._callSubscriber(this._state);
     }
 

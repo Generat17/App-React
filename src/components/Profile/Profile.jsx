@@ -7,13 +7,11 @@ import {newPost, updateNewPosText} from "../../redux/state";
 const Profile = (props) => {
     return (
         <div className={s.Content}>
-            <img src="https://sun9-24.userapi.com/c854532/v854532723/238477/kUYAMp7IJI8.jpg" />
             <ProfileInfo />
             <Wall
-                posts={props.posts}
-                newPost={props.newPost}
-                newPostText={props.newPostText}
-                updateNewPostText={props.updateNewPostText}
+                posts={props.profilePage.postData}
+                newPost={props.profilePage.newPostText}
+                dispatch={props.dispatch}
             />
         </div>
     );

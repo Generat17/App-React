@@ -1,32 +1,38 @@
 import React from 'react';
 import s from './Wall.module.css';
 import Post from './Post/Post';
+import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
 
 const Wall = (props) => {
+    let PostElements =
+        props.posts.map(p => <Post id={p.id} message={p.message}/>);
 
-    let newPostElement = React.createRef();
+    let newPostText = props.newPostText;
 
     let addPost = () => {
-        let text = newPostElement.current.value;
-        props.newPost(text);
+        props.dispatch(addPostActionCreator());
     }
 
-    let PostElements =
-        props.posts.map( p => <Post id={p.id} message={p.message}/>);
-
-    let onPostChange = () => {
-        let text = newPostElement.current.value;
-        props.updateNewPostText(text);
+    let onPostChange = (e) => {
+        let text = e.target.value;
+        let action = updateNewPostTextActionCreator(text);
+        props.dispatch(action);
     }
 
-    return  (
+    return (
         <div className="Wall">
-            <textarea
-                ref={newPostElement}
-                onChange={onPostChange}
-                value={props.newPostText}
-            />
-            <button onClick={addPost}>New Post</button>
+            <div>
+                <textarea
+                    value={newPostText}
+                    onChange={onPostChange}
+                    placeholder='Enter your message...'
+                />
+            </div>
+            <div>
+                <button onClick={addPost}>
+                    New Post
+                </button>
+            </div>
             {PostElements}
         </div>
     );

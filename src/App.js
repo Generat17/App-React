@@ -11,26 +11,22 @@ import {newPost} from "./redux/state";
 
 const App = (props) => {
     return (
-        <BrowserRouter>
-            <div className="app-wrapper">
-                <Header/>
-                <Navbar/>
-                <div className="app-wrapper-content">
-                    <Route path='/profile' render={() => <Profile
-                        posts={props.appState.profilePage.postData}
-                        newPost={props.newPost}
-                        newPostText={props.appState.profilePage.newPostText}
-                        updateNewPostText={props.updateNewPostText}
+        <div className="app-wrapper">
+            <Header/>
+            <Navbar/>
+            <div className="app-wrapper-content">
+                <Route path='/profile' render={() => <Profile
+                    profilePage={props.appState.profilePage}
+                    dispatch={props.dispatch}
 
-                    />}/>
-                    <Route path='/dialogs' render={() => <Dialogs
-                        messagesData={props.appState.messagePage.messagesData}
-                        dialogsData={props.appState.messagePage.dialogsData}
-                    />}/>
-                </div>
-                <Footer/>
+                />}/>
+                <Route path='/dialogs' render={() => <Dialogs
+                    state={props.appState.messagePage}
+                    dispatch={props.dispatch}
+                />}/>
             </div>
-        </BrowserRouter>
+            <Footer/>
+        </div>
     );
 }
 
