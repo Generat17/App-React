@@ -10,13 +10,12 @@ const Wall = (props) => {
     let newPostText = props.newPostText;
 
     let addPost = () => {
-        props.dispatch(addPostActionCreator());
+        props.addPost();
     }
 
     let onPostChange = (e) => {
         let text = e.target.value;
-        let action = updateNewPostTextActionCreator(text);
-        props.dispatch(action);
+        props.updateNewText(text);
     }
 
     return (

@@ -10,6 +10,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {newPost} from "./redux/store";
 import profileReducer from "./redux/profile-reducer";
 import dialogsReducer from "./redux/dialogs-reducer";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 const App = (props) => {
     return (
@@ -17,15 +18,12 @@ const App = (props) => {
             <Header/>
             <Navbar/>
             <div className="app-wrapper-content">
-                <Route path='/profile' render={() => <Profile
-                    profilePage={props.state.ProfilePage}
-                    dispatch={props.dispatch}
-
-                />}/>
-                <Route path='/dialogs' render={() => <Dialogs
-                    state={props.state.DialogsPage}
-                    dispatch={props.dispatch}
-                />}/>
+                <Route path='/profile' render={() =>
+                    <Profile store={props.store} />
+                }/>
+                <Route path='/dialogs' render={() =>
+                    <DialogsContainer store={props.store} />
+                }/>
             </div>
             <Footer/>
         </div>
