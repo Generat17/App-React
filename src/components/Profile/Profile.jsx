@@ -3,11 +3,11 @@ import s from './Profile.module.css';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import WallContainer from "./Wall/WallContainer";
 
-const Profile = (props) => {
+const Profile = () => {
     return (
         <div className={s.Content}>
             <ProfileInfo />
-            <WallContainer store={props.store} />
+            <WallContainer />
         </div>
     );
 }

@@ -5,24 +5,27 @@ import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
 import Footer from './components/Footer/Footer';
-import Dialogs from "./components/Dialogs/Dialogs";
-import {BrowserRouter, Route} from "react-router-dom";
-import {newPost} from "./redux/store";
-import profileReducer from "./redux/profile-reducer";
-import dialogsReducer from "./redux/dialogs-reducer";
+import {Route} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 
-const App = (props) => {
+
+const App = () => {
     return (
         <div className="app-wrapper">
             <Header/>
             <Navbar/>
             <div className="app-wrapper-content">
                 <Route path='/profile' render={() =>
-                    <Profile store={props.store} />
+                    <Profile />
                 }/>
+
                 <Route path='/dialogs' render={() =>
-                    <DialogsContainer store={props.store} />
+                    <DialogsContainer />
+                }/>
+
+                <Route path='/users' render={() =>
+                    <UsersContainer />
                 }/>
             </div>
             <Footer/>

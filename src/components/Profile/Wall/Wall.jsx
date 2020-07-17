@@ -1,7 +1,6 @@
 import React from 'react';
 import s from './Wall.module.css';
 import Post from './Post/Post';
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
 
 const Wall = (props) => {
     let PostElements =
