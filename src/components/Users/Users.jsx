@@ -1,81 +1,76 @@
 import React from "react";
 import styles from './Users.module.css';
+import * as axios from 'axios'
+import userPhotouUdefined from '../../assets/images/w480.jpg'
 
-let Users = (props) => {
-    if (props.users.length === 0) {
-        props.setUsers([
-            {
-                id: 0,
-                photoUrl: 'https://99px.ru/sstorage/56/2019/09/mid_324597_239159.jpg',
-                followed: false,
-                fullname: 'Aliev Timur',
-                status: 'Helloooo....?',
-                location: {city: 'Moscow', country: 'Russia'}
-            },
-            {
-                id: 1,
-                photoUrl: 'https://www.rosphoto.com/images/u/articles/1510/7_5.jpg',
-                followed: true,
-                fullname: 'Alex Adamov',
-                status: 'BB',
-                location: {city: 'Kiev', country: 'Ukraine'}
-            },
-            {
-                id: 2,
-                photoUrl: 'https://www.rosphoto.com/images/u/articles/1510/4_8.jpg',
-                followed: false,
-                fullname: 'Ludmila Alieva',
-                status: 'Good job',
-                location: {city: 'St. Petersburg', country: 'Russia'}
-            },
-            {
-                id: 3,
-                photoUrl: 'https://lh3.googleusercontent.com/proxy/jtu8XyqgHqj6WMg7N6VREPqsMk020be9onpVamLUzDXbrpInX6MUAG5bV6qOLsKgtb9ycv5d7SFjkk2wJ5UkDyfm6A',
-                followed: true,
-                fullname: 'Tatiana Alieva',
-                status: 'Good luck',
-                location: {city: 'Minsk', country: 'Belarus'}
-            },
-            {
-                id: 4,
-                photoUrl: 'https://lh3.googleusercontent.com/proxy/ThhO5ieSH6eKRY5fcJrCvW9DXwYmNgRQVAyumCuyNEn7IRAYu6-mymfexUqFKrEiCz1nzoKg8l46in0Gd6quwrasAgh_dqES40lFSgpsfLf4q112gAGP9H8ZHeigVR5ZZdfn5pAo_7JT1Tx18n2RYYgRXyOP2Q',
-                followed: false,
-                fullname: 'Lisa Keldysh',
-                status: 'Free',
-                location: {city: 'Moscow', country: 'Russia'}
-            }
-        ])
+class Users extends React.Component {
+
+    componentDidMount() {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+            .then(response => {
+            this.props.setUsers(response.data.items);
+            this.props.setUsersTotalCount(response.data.totalCount);
+        });
     }
 
-    return <div>{
-        props.users.map(u => <div key={u.id}>
+    onPageChanged = (pageNumber) => {
+        this.props.setCurrentPage(pageNumber);
+        debugger
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setUsers(response.data.items)
+            });
+    }
+
+    render() {
+
+        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
+
+        let pages = [];
+        let i = 1;
+        while (i <= pagesCount) {
+            pages.push(i);
+            i++;
+            if (i > 20) break;
+        }
+
+        return <div>
+            <div>
+                { pages.map( p => {
+                     return <span className={this.props.currentPage === p && styles.selectedPage} onClick={(e) => {this.onPageChanged(p)}}>{p} </span>
+                })}
+            </div>
+            {
+                this.props.users.map(u => <div key={u.id}>
             <span>
                 <div>
-                    <img src={u.photoUrl} className={styles.userPhoto}/>
+                    <img src={u.photos.small != null ? u.photos.small : userPhotouUdefined}
+                         className={styles.userPhoto}/>
                 </div>
                 <div>
                     {u.followed
                         ? <button onClick={() => {
-                            props.unfollow(u.id)
+                            this.props.unfollow(u.id)
                         }}>Unfollow</button>
                         : <button onClick={() => {
-                            props.follow(u.id)
+                            this.props.follow(u.id)
                         }}>Follow</button>
                     }
                 </div>
             </span>
-            <span>
+                    <span>
                 <span>
-                    <div>{u.fullname}</div>
+                    <div>{u.name}</div>
                     <div>{u.status}</div>
                 </span>
                 <span>
-                    <div>{u.location.city}</div>
-                    <div>{u.location.country}</div>
+                    <div>{"u.location.city"}</div>
+                    <div>{"u.location.country"}</div>
                 </span>
             </span>
-        </div>)
-    }</div>
+                </div>)
+            }</div>
+    }
 }
 
 export default Users;
