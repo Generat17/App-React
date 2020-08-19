@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
-import Profile from './components/Profile/Profile';
+import ProfileContainer from './components/Profile/ProfileContainer';
 import Footer from './components/Footer/Footer';
 import {Route} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
@@ -17,7 +17,7 @@ const App = () => {
             <Navbar/>
             <div className="app-wrapper-content">
                 <Route path='/profile' render={() =>
-                    <Profile />
+                    <ProfileContainer />
                 }/>
 
                 <Route path='/dialogs' render={() =>

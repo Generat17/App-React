@@ -1,13 +1,15 @@
-import React from 'react';
-import s from './Profile.module.css';
-import ProfileInfo from './ProfileInfo/ProfileInfo';
+import React from "react";
+import s from "./Profile.module.css";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import WallContainer from "./Wall/WallContainer";
+import Preloader from "../common/Preloader/Preloader";
 
-const Profile = () => {
+const Profile = (props) => {
+    debugger
     return (
         <div className={s.Content}>
-            <ProfileInfo />
-            <WallContainer />
+            <ProfileInfo profile={props.profile}/>
+            <WallContainer/>
         </div>
     );
 }
